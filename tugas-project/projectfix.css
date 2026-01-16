@@ -1,0 +1,428 @@
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: "Poppins", sans-serif;
+}
+
+@media (max-width: 900px) {
+    .service-grid {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
+
+@media (max-width: 600px) {
+    .service-grid {
+        grid-template-columns: 1fr;
+    }
+}
+@media (max-width: 768px) {
+    .hero-title {
+        font-size: 32px;
+    }
+
+    .hero-subtitle {
+        font-size: 14px;
+    }
+
+    .hero-buttons {
+        flex-direction: column;
+    }
+}
+
+
+.logo {
+    display: flex;
+    align-items: center;
+    height: 100%; 
+}
+
+.logo img {
+    height: 40px; 
+    width: auto;
+    object-fit: contain;
+    display: block; 
+    transition: transform 0.3s ease;
+}
+
+.logo img:hover {
+    transform: scale(1.05);
+}
+
+.navbar {
+    width: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 50;
+    background: rgba(0, 0, 0, 0.2);
+    backdrop-filter: blur(6px);
+    padding: 18px 0;
+}
+
+/* Style untuk menu yang sedang aktif */
+.nav-links a.active {
+    font-weight: 700; /* Membuat teks lebih tebal */
+    border-bottom: 2px solid #ffffff; /* Garis bawah warna putih */
+    padding-bottom: 5px; /* Jarak antara tulisan dan garis */
+    opacity: 1; /* Memastikan teks terlihat jelas */
+}
+
+.nav-container {
+    height: 100%;
+    width: 85%;
+    margin: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    gap: 40px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    font-size: 15px;
+    color: white;
+    font-weight: 300;
+    transition: 0.2s;
+}
+
+.nav-links a:hover {
+    opacity: 0.7;
+}
+
+.hero {
+    width: 100%;
+    height: 100vh;
+    background-image: url("./asset-service/Background2.png"); 
+    
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding-top: 80px; 
+}
+
+.hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.4);
+}
+
+.hero-content {
+    position: relative;
+    z-index: 10;
+    width: 80%;
+    max-width: 900px;
+    text-align: center;
+    color: white;
+}
+
+.hero-title {
+    font-size: 42px;
+    font-weight: 800;
+    letter-spacing: 1px;
+}
+
+.hero-subtitle {
+    margin-top: 15px;
+    font-size: 16px;
+    font-weight: 300;
+    max-width: 700px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.hero-buttons {
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+}
+
+.btn {
+    padding: 12px 26px;
+    font-size: 14px;
+    font-weight: 600;
+    border: 2px solid white;
+    cursor: pointer;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.btn-outline {
+    background: transparent;
+    color: white;
+}
+
+.btn-outline:hover {
+    background: white;
+    color: black;
+}
+
+.btn-filled {
+    background: white;
+    color: black;
+    border-color: white;
+}
+
+.btn-filled:hover {
+    background: rgb(220,220,220);
+}
+
+.slogan {
+    position: absolute;
+    top: 58%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+    color: white;
+    width: 80%;
+}
+
+.slogan h1 {
+    font-size: 38px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    margin-bottom: 10px;
+}
+
+.slogan p {
+    font-size: 20px;
+    margin-bottom: 30px;
+    color: antiquewhite;
+}
+.about{
+    display: flex;
+    justify-content: center;
+    padding: 50px;
+    font-size: 30px;
+}
+
+.text{
+    justify-content: center;
+    margin: 70px;
+    font-size: 25px;
+}
+.paragraf{
+    padding: 5px;
+}
+
+.sertifikat{
+    display: flex;
+    justify-content: center;
+    padding: 100px;
+    gap: 50px;
+}
+
+.service-section {
+    width: 100%;
+    padding: 80px 0;
+    background: white;
+    display: flex;
+    justify-content: center;
+}
+
+.service-container {
+    width: 85%;
+    max-width: 1200px;
+    text-align: center;
+}
+
+.service-title {
+    font-size: 36px;
+    font-weight: 800;
+    margin-bottom: 50px;
+    letter-spacing: 1px;
+}
+
+.service-grid {
+    display: flex;
+    gap: 40px;
+    align-items: start;
+    justify-content: center;
+}
+
+.service-item img {
+    width: 150px;
+    height: auto;
+    margin-bottom: 20px;
+}
+
+.service-item h3 {
+    font-size: 18px;
+    font-weight: 700;
+    margin-bottom: 12px;
+    letter-spacing: 1px;
+}
+
+.service-item p {
+    font-size: 14px;
+    width: 85%;
+    margin: 0 auto;
+    color: #444;
+    line-height: 1.5;
+}
+
+.service-btn-wrapper {
+    margin-top: 50px;
+}
+
+.service-btn {
+    display: inline-block;
+    background: black;
+    color: white;
+    padding: 12px 32px;
+    font-size: 14px;
+    font-weight: 600;
+    text-decoration: none;
+    transition: 0.2s;
+}
+
+.service-btn:hover {
+    background: rgb(40,40,40);
+}
+
+.garansi-konten{
+    display: flex;
+    color: white;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    font-size: 20px;
+    width: 80%;
+    margin: 0 auto;
+}
+
+.garansi-konten h3{
+    font-size: 30px;
+}
+
+.garansi-section{
+background: url(./asset/garansi.png);
+}
+
+.garansi-conteiner{
+    color: white;
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    align-items: start;
+}
+ .text-garansi{
+    gap: 20px;
+ }
+
+ .daftar-garansi{
+    display: flex;
+ }
+.daftar-garansi img{
+    height: 200px;
+    width: 200px;
+    object-fit: contain;
+}
+
+.button-garansi{
+    display: inline-block;
+    padding: 12px 26px;
+    color: black;
+    background: black;
+    text-decoration: none;
+    border: 2px solid white;
+    font-weight: 600;
+    cursor: pointer;
+    transition: 0,2s;
+    font-size: 14px;
+}
+
+.btngr{
+    text-decoration: none;
+    color: white;
+}
+.button-garansi:hover{
+    background: rgb(40,40,40);
+}
+
+.testimoni-section{
+    width: 100%;
+    background: white;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+    padding-top: 50px;
+}
+
+.service-item {
+    padding: 20px;
+    border-radius: 15px; 
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    cursor: pointer;
+    border: 1px solid transparent; 
+}
+
+.service-item:hover {
+    transform: translateY(-15px); 
+    background-color: #ffffff;
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1); 
+    border: 1px solid #eeeeee;
+}
+
+.service-item img {
+    transition: transform 0.5s ease;
+}
+
+.service-item:hover img {
+    transform: scale(1.1);
+}
+
+.service-item:hover h3 {
+    color: #000;
+    transition: 0.3s;
+}
+
+.service-btn {
+    transition: all 0.3s ease;
+}
+
+.service-btn:hover {
+    transform: scale(1.05);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.service-grid {
+    padding-top: 20px;
+    padding-bottom: 20px;
+}
+
+ /* 1. Animasi untuk gambar di bagian OUR SERVICE */
+        .service-item img {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94); /* Gerakan halus */
+        }
+
+        /* Saat kartu service di-hover, gambarnya membesar */
+        .service-item:hover img {
+            transform: scale(1.15); /* Membesar 15% */
+        }
+
+        /* 2. Animasi untuk gambar di bagian GARANSI */
+        .daftar-garansi img {
+            transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+        }
+
+        /* Saat gambar garansi di-hover, gambarnya membesar */
+        .daftar-garansi img:hover {
+            transform: scale(1.15);
+            z-index: 10; /* Agar gambar tampil paling depan saat membesar */
+            position: relative;
+        }

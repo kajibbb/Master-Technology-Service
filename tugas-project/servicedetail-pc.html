@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Detail Laptop</title>
+    <link rel="stylesheet" href="servicedetail-pc.css">
+</head>
+
+<body>
+    <form class="list-service-handphone">
+        
+        <center>
+            <img src="./asset-terbaru/asset terbaru service komputer.png" alt="">
+        </center>
+
+        <h1 class="heading">LAPTOP REPAIR</h1>
+        <h2>Hardware</h2>
+        <div>
+            <div class="list-kerusakan-hardware">
+                <label class="item-hardware">
+                    <span>Layar Tidak Tampil</span>
+                    <input type="checkbox" value="Layar Tidak Tampil" data-category="Hardware" data-device="Komputer">
+                </label>
+
+                <label class="item-hardware">
+                    <span>Keyboard Dan Mouse</span>
+                    <input type="checkbox" value="Keyboard Dan Mouse" data-category="Hardware" data-device="Komputer">
+                </label>
+
+                <label class="item-hardware">
+                    <span>Penyimpanan Rusak</span>
+                    <input type="checkbox" value="Penyimpanan Rusak" data-category="Hardware" data-device="Komputer">
+                </label>
+
+                <label class="item-hardware">
+                    <span>Overheat</span>
+                    <input type="checkbox" value="Overheat" data-category="Hardware" data-device="Komputer">
+                </label>
+
+                <label class="item-hardware">
+                    <span>Port USB/Audio Mati</span>
+                    <input type="checkbox" value="Port USB/Audio Mati" data-category="Hardware" data-device="Komputer">
+                </label>
+
+                <label class="item-hardware">
+                    <span>Ganti Baterai CMOS</span>
+                    <input type="checkbox" value="Ganti Baterai CMOS" data-category="Hardware" data-device="Komputer">
+                </label>
+            </div>
+
+            <h2>Software</h2>
+            <div class="list-kerusakan-software">
+                <label class="item-software">
+                    <span>Install Ulang OS</span>
+                    <input type="checkbox" value="Install Ulang OS" data-category="Software" data-device="Komputer">
+                </label>
+
+                <label class="item-software">
+                    <span>Blue Screen</span>
+                    <input type="checkbox" value="Blue Screen" data-category="Software" data-device="Komputer">
+                </label>
+ 
+                <label class="item-software">
+                    <span>Driver Bermasalah</span>
+                    <input type="checkbox" value="Driver Bermasalah" data-category="Software" data-device="Komputer">
+                </label>
+
+                <label class="item-software">
+                    <span>Install Game</span>
+                    <input type="checkbox" value="Install Game" data-category="Software" data-device="Komputer">
+                </label>
+                <label class="item-software">
+                    <span>OS Corrupt</span>
+                    <input type="checkbox" value="OS Corrupt" data-category="Software" data-device="Komputer">
+                </label>
+                <label class="item-software">
+                    <span>Lupa Password/PIN</span>
+                    <input type="checkbox" value="Lupa Password/PIN" data-category="Software" data-device="Komputer">
+                </label>
+            </div>
+
+            <div class="button">
+            <button type="button1">
+                <a class="btn1" href="service.html">Kembali</a>
+            </button>
+            <button type="button" id="btn-submit-service">
+                <a class="btn2" style="cursor: pointer;">Service</a>
+            </button>
+        </div>
+
+        </form>
+
+    <script>
+    const btnService = document.getElementById('btn-submit-service');
+    
+    btnService.addEventListener('click', () => {
+        const selectedServices = [];
+        const categories = new Set();
+        let deviceName = ""; // Untuk mencatat jenis perangkat
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        
+        if (checkboxes.length === 0) {
+            alert("King, pilih minimal satu kerusakan dulu ya!");
+            return;
+        }
+
+        checkboxes.forEach((checkbox) => {
+            selectedServices.push(checkbox.value);
+            // Ambil kategori & device (Pastikan huruf kecil di script sesuai dengan atribut HTML)
+            categories.add(checkbox.getAttribute('data-category').toLowerCase());
+            deviceName = checkbox.getAttribute('data-device');
+        });
+
+        // --- LOGIKA IF UNTUK KATEGORI ---
+        let finalCategory = "";
+        if (categories.has('hardware') && categories.has('software')) {
+            finalCategory = "Hardware & Software";
+        } else if (categories.has('hardware')) {
+            finalCategory = "Hardware";
+        } else if (categories.has('software')) {
+            finalCategory = "Software";
+        }
+
+        // Simpan data baru (Otomatis menimpa data lama di memori)
+        localStorage.setItem('pilihanService', JSON.stringify(selectedServices));
+        localStorage.setItem('kategoriService', finalCategory);
+        localStorage.setItem('jenisPerangkat', deviceName);
+        
+        // Pindah ke halaman formulir
+        window.location.href = "formulir-service.html";
+    });
+</script>
+
+</body>
+
+</html>

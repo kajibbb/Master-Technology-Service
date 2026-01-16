@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Service Detail Handphone</title>
+    <link rel="stylesheet" href="servicedetail-hp.css">
+</head>
+
+<body>
+
+    <form class="list-service-handphone">
+
+        <center>
+            <img src="./asset-terbaru/asset terbaru service hp.png" alt="Handphone Repair">
+        </center>
+
+        <h1 class="heading">HANDPHONE REPAIR</h1>
+        <h2>Hardware</h2>
+        <div class="list-kerusakan-hardware">
+
+            <label class="item-hardware">
+                <span>Layar</span>
+                <input type="checkbox" value="Layar" data-category="hardware" data-device="Handphone">
+            </label>
+
+            <label class="item-hardware">
+                <span>Baterai</span>
+                <input type="checkbox" value="Baterai" data-category="hardware" data-device="Handphone">
+            </label>
+
+            <label class="item-hardware">
+                <span>Port dan Tombol</span>
+                <input type="checkbox" value="Port dan Tombol" data-category="hardware" data-device="Handphone">
+            </label>
+
+            <label class="item-hardware">
+                <span>Speaker dan Microfon</span>
+                <input type="checkbox" value="Speaker dan Microfon" data-category="hardware" data-device="Handphone">
+            </label>
+
+        </div>
+
+        <h2>Software</h2>
+        <div class="list-kerusakan-software">
+
+            <label class="item-software">
+                <span>Lupa Password / PIN</span>
+                <input type="checkbox" value="Lupa Password / PIN" data-category="software" data-device="Handphone">
+            </label>
+
+            <label class="item-software">
+                <span>Bootloop</span>
+                <input type="checkbox" value="Bootloop" data-category="software" data-device="Handphone">
+            </label>
+
+            <label class="item-software">
+                <span>Gagal Update</span>
+                <input type="checkbox" value="Gagal Update" data-category="software" data-device="Handphone">
+            </label>
+
+            <label class="item-software">
+                <span>Aplikasi Sering Force Close</span>
+                <input type="checkbox" value="Aplikasi Force Close" data-category="software" data-device="Handphone">
+            </label>
+
+        </div>
+
+        <div class="button">
+            <button type="button1">
+                <a class="btn1" href="service.html">Kembali</a>
+            </button>
+            <button type="button" id="btn-submit-service">
+                <a class="btn2" style="cursor: pointer;">Service</a>
+            </button>
+        </div>
+
+    </form>
+
+<script>
+    const btnService = document.getElementById('btn-submit-service');
+    
+    btnService.addEventListener('click', () => {
+        const selectedServices = [];
+        const categories = new Set();
+        let deviceName = ""; // Untuk mencatat jenis perangkat
+
+        const checkboxes = document.querySelectorAll('input[type="checkbox"]:checked');
+        
+        if (checkboxes.length === 0) {
+            alert("King, pilih minimal satu kerusakan dulu ya!");
+            return;
+        }
+
+        checkboxes.forEach((checkbox) => {
+            selectedServices.push(checkbox.value);
+            // Ambil kategori & device (Pastikan huruf kecil di script sesuai dengan atribut HTML)
+            categories.add(checkbox.getAttribute('data-category').toLowerCase());
+            deviceName = checkbox.getAttribute('data-device');
+        });
+
+        // --- LOGIKA IF UNTUK KATEGORI ---
+        let finalCategory = "";
+        if (categories.has('hardware') && categories.has('software')) {
+            finalCategory = "Hardware & Software";
+        } else if (categories.has('hardware')) {
+            finalCategory = "Hardware";
+        } else if (categories.has('software')) {
+            finalCategory = "Software";
+        }
+
+        // Simpan data baru (Otomatis menimpa data lama di memori)
+        localStorage.setItem('pilihanService', JSON.stringify(selectedServices));
+        localStorage.setItem('kategoriService', finalCategory);
+        localStorage.setItem('jenisPerangkat', deviceName);
+        
+        // Pindah ke halaman formulir
+        window.location.href = "formulir-service.html";
+    });
+</script>
+
+</body>
+
+</html>

@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact</title>
+    <link rel="stylesheet" href="contact.css">
+    <script src="https://unpkg.com/@phosphor-icons/web"></script>
+</head>
+
+<body>
+
+    <header class="navbar">
+        <div class="nav-container">
+            <div class="logo"><img src="./asset/logo navbar.png" alt=""></div>
+            <ul class="nav-links">
+                <li><a href="projectfix.html">Home</a></li>
+                <li><a href="service.html">Service</a></li>
+                <li><a href="aboutus.html">About Us</a></li>
+                <li><a href="contact.html" class="active">Contact Us</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <section class="hero">
+        <div class="hero-overlay"></div>
+        <div class="hero-content">
+            <h1 class="hero-title">GET IN TOUCH FOR FAST AND RELIABLE SUPPORT</h1>
+            <p class="hero-subtitle">
+                We provide quick responses and reliable support for all your electronic service needs. Contact us
+                anytime.
+            </p>
+        </div>
+    </section>
+
+    <section class="section-form">
+        <div class="contact-form">
+            <form id="formulir">
+                <input type="hidden" name="action" value="submitEmail">
+                <label>Your Name :</label>
+                <input type="text" name="nama" required>
+
+                <label>Your Email :</label>
+                <input type="email" name="email" required>
+
+                <label>Subject :</label>
+                <input type="text" name="subject">
+
+                <label>Your Message :</label>
+                <textarea id="keluhan" name="message" required></textarea>
+
+                <button type="submit">Kirim</button>
+            </form>
+        </div>
+
+        <div class="deskripsi-contact">
+            <div class="no-hp">
+                <i class="ph ph-phone"></i>
+                <p>0882002734202</p>
+            </div>
+            <div class="email">
+                <i class="ph ph-envelope"></i>
+                <p>rajabagustin4@gmail.com</p>
+            </div>
+            <div class="alamat">
+                <i class="ph ph-map-pin"></i>
+                <p>Jl Mujair 3 No.57, RW.4, Bambu Apus, Kec Pamulang Kota Tangerang Selatan, Banten</p>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <iframe
+            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d247.84504706228!2d106.72635878271103!3d-6.326494203986482!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69ef37e56e917b%3A0xd64f0da3195075a4!2sMadinah%202!5e0!3m2!1sid!2sid!4v1765556936341!5m2!1sid!2sid"
+            width="100%" height="450" style="border:0;" allowfullscreen loading="lazy"
+            referrerpolicy="no-referrer-when-downgrade"></iframe>
+    </section>
+
+    <script>
+    const scriptURL = 'https://script.google.com/macros/s/AKfycbwx4ZWyY7E4NEMLP4UfFeeRVXDXRB_nNShdJejEnFfgx7VMnTRI84Jxf-dckfQWkqMXww/exec';
+    const formContact = document.getElementById('formulir');
+
+    console.log("Script Load: Mencari form dengan ID 'formulir'...");
+
+    if (!formContact) {
+        console.error("EROR: ID 'formulir' tidak ditemukan di HTML King!");
+    } else {
+        formContact.addEventListener('submit', e => {
+            e.preventDefault();
+            console.log("Tombol diklik: Memulai proses kirim...");
+
+            const btnSubmit = e.target.querySelector('button');
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Mengirim...";
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(formContact) 
+            })
+            .then(response => {
+                console.log("Respon diterima dari Google!");
+                alert("Pesan Berhasil Terkirim");
+                formContact.reset();
+            })
+            .catch(error => {
+                console.error('Error saat fetch:', error.message);
+                alert("Gagal kirim: " + error.message);
+            })
+            .finally(() => {
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = "Kirim Message";
+            });
+        });
+    }
+</script>
+
+</body>
+
+</html>

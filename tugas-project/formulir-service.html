@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="id">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Formulir Service</title>
+    <link rel="stylesheet" href="formulir-service.css">
+    
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+</head>
+
+<body>
+
+    <h1 style="text-align:center;">FORMULIR</h1>
+
+    <form class="formulir-service" id="formService">
+        <input type="hidden" name="action" value="submitPemesanan">
+
+        <div class="form-group">
+            <label>Nama :</label>
+            <input type="text" name="nama" required>
+
+            <label>No Telepon :</label>
+            <input type="text" name="noTelepon" required>
+
+            <label>Alamat :</label>
+            <input type="text" name="alamat" required>
+
+            <label>Tanggal :</label>
+            <input type="date" name="tanggal" required>
+        </div>
+
+        <div class="form-group">
+            <label>Jenis Perangkat :</label>
+            <input type="text" id="jenisPerangkat" value="Handphone" readonly>
+
+            <label>Merek :</label>
+            <input type="text" name="merek" required>
+
+            <label>Model / Tipe :</label>
+            <input type="text" name="model/type" required>
+
+            <label>Service Type :</label>
+            <input type="text" name="serviceType" id="serviceType" readonly>
+        </div>
+        
+        <div class="detail-kerusakan">
+        <label>Detail Kerusakan :</label>
+        <textarea id="keluhan" name="keluhan" rows="6" readonly></textarea>
+        </div>
+    </form> 
+    
+    <div class="sq">
+        <div>
+            <h2 class="ketentuan">SYARAT DAN KETENTUAN</h2>
+        </div>
+        <div>
+            <p>1. Customer memahami bahwa teknisi akan melakukan pengecekan awal untuk menentukan kondisi kerusakan yang sebenarnya. <br> <br>
+               2. Biaya dapat berubah setelah pengecekan lebih lanjut. <br> <br>
+               3. Customer wajib mengambil perangkat maksimal 30 hari. <br> <br>
+               4. Kerusakan akibat data hilang bukan tanggung jawab pihak service. <br> <br>
+               5. Garansi hanya berlaku untuk kerusakan yang sama.
+            </p>
+        </div>
+    </div>
+
+    <div class="syarat">
+        <input type="checkbox" id="setuju" required>
+        <label for="setuju">Saya menyetujui syarat dan ketentuan yang berlaku</label>
+    </div>
+<center>
+    <div class="button-group">
+        <button type="button" onclick="window.history.back()">Kembali</button>
+        <button type="submit" form="formService">SUBMIT</button>
+    </div>
+    </center>
+
+
+   <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        // Ambil data dari memori browser
+        const dataKerusakan = JSON.parse(localStorage.getItem('pilihanService'));
+        const kategoriTersimpan = localStorage.getItem('kategoriService');
+        const perangkatTersimpan = localStorage.getItem('jenisPerangkat');
+        
+        // Hubungkan ke ID elemen di HTML King
+        const inputServiceType = document.getElementById('serviceType');
+        const inputDevice = document.getElementById('jenisPerangkat');
+        const textareaKeluhan = document.getElementById('keluhan');
+
+        // 1. Tampilkan Jenis Perangkat (Laptop / Handphone / Komputer)
+        if (perangkatTersimpan && inputDevice) {
+            inputDevice.value = perangkatTersimpan;
+        }
+
+        // 2. Tampilkan Tipe Service (Hardware / Software)
+        if (kategoriTersimpan && inputServiceType) {
+            inputServiceType.value = kategoriTersimpan;
+        }
+
+        // 3. Tampilkan List Kerusakan dengan format strip (-)
+        if (dataKerusakan && dataKerusakan.length > 0 && textareaKeluhan) {
+            textareaKeluhan.value = "\n" + 
+                dataKerusakan.map(item => "- " + item).join('\n');
+        }
+    });
+</script>
+
+<script>
+        // Logika Kirim Data
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbwx4ZWyY7E4NEMLP4UfFeeRVXDXRB_nNShdJejEnFfgx7VMnTRI84Jxf-dckfQWkqMXww/exec';
+        const formService = document.getElementById('formService');
+
+        formService.addEventListener('submit', e => {
+            e.preventDefault();
+
+            const checkboxSetuju = document.getElementById('setuju');
+            if (!checkboxSetuju.checked) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'Kesalahan',
+                    text: 'Silahkan centang dulu syarat dan ketentuannya!',
+                    confirmButtonColor: '#3085d6',
+                });
+                return;
+            }
+
+            const btnSubmit = document.querySelector('button[type="submit"]');
+            const originalText = btnSubmit.innerText;
+            btnSubmit.disabled = true;
+            btnSubmit.innerText = "Mengirim...";
+
+            fetch(scriptURL, { 
+                method: 'POST', 
+                body: new FormData(formService) 
+            })
+            .then(response => {
+                Swal.fire({
+                    icon: 'success',
+                    title: 'Mantap!',
+                    text: 'Data Pemesanan Berhasil Terkirim.',
+                    confirmButtonText: 'Oke',
+                    confirmButtonColor: '#28a745'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        localStorage.clear();
+                        formService.reset();
+                        window.location.href = "service.html";
+                    }
+                });
+            })
+            .catch(error => {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Gagal',
+                    text: 'Error: ' + error.message,
+                });
+                btnSubmit.disabled = false;
+                btnSubmit.innerText = originalText;
+            });
+        });
+    </script>
+</body>
+</html>
